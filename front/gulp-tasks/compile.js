@@ -1,26 +1,31 @@
-var browserify = require('browserify'),
+var gulp = require('gulp'),
+    browserify = require("browserify"),
     babelify = require('babelify'),
-    gulp = require('gulp'),
-    vinylBuffer = require('vinyl-buffer'),
-    vinylSourceStream = require('vinyl-source-stream'),
-    exorcist = require('exorcist');
+    tsify = require("tsify"),
+    source = require("vinyl-source-stream"),
+    vBuffer = require('vinyl-buffer'),
+    sourcemaps = require("gulp-sourcemaps");
 
-module.exports = function () {
+module.exports = function() {
 
-    var sources = browserify({
-        entries: [
-            './src/app/app',
-        ],
-        debug: true
-    })
+    return browserify({
+            entries: [
+                'src/app/app.ts'
+            ],
+            debug: true,
+        })
+        .plugin(tsify)
         .transform(babelify, {
-            presets: ["es2015", "react"],
+            presets: [
+                "es2015",
+                "react"
+            ],
             sourceMaps: false
-        });
-
-    return sources.bundle()
-        .pipe(exorcist('www/build/js/app.min.js.map'))
-        .pipe(vinylSourceStream('app.min.js'))
-        .pipe(vinylBuffer())
+        })
+        .bundle()
+        .pipe(source("app.min.js"))
+        .pipe(vBuffer())
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./www/build/js/'));
 }
