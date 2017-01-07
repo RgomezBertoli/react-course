@@ -1,9 +1,24 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es6",
+        "target": "es5",
         "noImplicitAny": false,
-        "sourceMap": false,
-        "jsx": "react"
-    }
+        "sourceMap": true,
+        "jsx": "react",
+        "outDir": "./www/build/js",
+        "rootDir": ".",
+        "types": [
+            "react",
+            "react-dom",
+            "react-router",
+            "react-redux",
+            "redux"
+        ]
+    },
+    "include":[
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

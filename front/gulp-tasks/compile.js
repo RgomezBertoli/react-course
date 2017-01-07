@@ -10,7 +10,7 @@ module.exports = function() {
 
     return browserify({
             entries: [
-                'src/app/app.ts'
+                'src/index.ts'
             ],
             debug: true,
         })

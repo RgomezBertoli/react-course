@@ -1,4 +1,4 @@
 
 module.exports = function () { };
 
-module.exports.dependencies = ['compile'];
+module.exports.dependencies = ['compile', 'watch'];

@@ -7,7 +7,10 @@ export class RxCard extends React.Component<{}, {}> {
 
     render() {
         return (
-            <div>Hola Mundo!</div>
+            <section>
+                <div>Hola Mundo!</div>
+                <div>{this.props.children}</div>
+            </section>
         );
     }
 };
